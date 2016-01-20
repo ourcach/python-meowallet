@@ -8,4 +8,7 @@ setup(name='meowallet',
       author_email='rds.mcc@gmail.com',
       license='GPLv2',
       packages=['meowallet'],
+      install_requires=[
+          'requests',
+      ],
       zip_safe=False)
