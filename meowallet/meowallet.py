@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 import requests
 
 from exceptions import CheckoutException
@@ -10,12 +10,14 @@ class Wallet(object):
 
     API_ENDPOINT = ''
     authorization_header_prefix = "WalletPT "
+    production_endpoint = 'https://services.wallet.pt/api/v2/'
+    endpoint = 'https://services.sandbox.meowallet.pt/api/v2/'
 
-    def __init__(self, api_key, url_confirm, url_cancel,
-                 endpoint='https://services.wallet.pt/api/v2/'):
+    def __init__(self, api_key, url_confirm, url_cancel, test=True):
         self.API_KEY = api_key
         self.authorization_header = "WalletPT " + api_key
-        self.endpoint = endpoint
+        if not test:
+            self.endpoint = self.production_endpoint
         self.url_confirm = url_confirm
         self.url_cancel = url_cancel
         self.authorization_header = self.authorization_header_prefix + api_key
